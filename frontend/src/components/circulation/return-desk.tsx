@@ -98,7 +98,7 @@ function LoanCard({
   onRenew: () => void;
 }) {
   return (
-    <li className={cn("rounded-lg border bg-surface p-4 transition-colors", confirming ? "border-brand" : "border-border")}>
+    <li className={cn("min-w-0 rounded-lg border bg-surface p-4 transition-colors", confirming ? "border-brand" : "border-border")}>
       <div className="flex gap-4">
         <BookCover isbn={loan.book.isbn13} title={loan.book.title} size="sm" />
         <div className="min-w-0 flex-1">

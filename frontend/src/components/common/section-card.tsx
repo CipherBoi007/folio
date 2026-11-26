@@ -17,7 +17,7 @@ export function SectionCard({
   bodyClassName?: string;
 }) {
   return (
-    <section className={cn("rounded-lg border border-border bg-surface", className)}>
+    <section className={cn("min-w-0 rounded-lg border border-border bg-surface", className)}>
       <header className="flex items-start justify-between gap-4 border-b border-border px-5 py-3.5">
         <div className="min-w-0">
           <h2 className="text-lg font-medium text-ink">{title}</h2>

@@ -210,7 +210,7 @@ function LoanList({
       ) : (
         <ul className="divide-y divide-border">
           {loans.map((loan) => (
-            <li key={loan.id} className="flex items-center gap-3 py-3">
+            <li key={loan.id} className="flex flex-wrap items-center gap-x-3 gap-y-2 py-3 sm:flex-nowrap">
               <BookCover isbn={loan.book.isbn13} title={loan.book.title} size="xs" />
               <div className="min-w-0 flex-1">
                 <p className="truncate font-medium">{loan.book.title}</p>
@@ -218,8 +218,10 @@ function LoanList({
                   {loan.member.fullName}
                 </Link>
               </div>
-              <LoanStatusBadge loan={loan} />
-              <LoanActions loan={loan} />
+              <div className="flex w-full items-center justify-between gap-2 pl-10 sm:w-auto sm:pl-0">
+                <LoanStatusBadge loan={loan} />
+                <LoanActions loan={loan} />
+              </div>
             </li>
           ))}
         </ul>

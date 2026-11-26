@@ -29,7 +29,7 @@ const tabsListVariants = cva(
     variants: {
       variant: {
         /** Underline tabs on a hairline — used for page/section tabs. */
-        default: "h-10 gap-5 border-b border-border w-full justify-start",
+        default: "h-10 gap-5 border-b border-border w-full justify-start overflow-x-auto overflow-y-hidden [scrollbar-width:none]",
         /** Compact segmented control — used for view toggles inside toolbars. */
         segmented: "h-9 gap-0.5 rounded-md border border-input bg-surface p-0.5",
       },
@@ -64,7 +64,7 @@ function TabsTrigger({
     <TabsPrimitive.Trigger
       data-slot="tabs-trigger"
       className={cn(
-        "relative inline-flex items-center justify-center gap-1.5 text-base font-medium whitespace-nowrap text-ink-muted transition-colors duration-150 hover:text-ink disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "relative inline-flex shrink-0 items-center justify-center gap-1.5 text-base font-medium whitespace-nowrap text-ink-muted transition-colors duration-150 hover:text-ink disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         "group-data-[variant=default]/tabs-list:h-full group-data-[variant=default]/tabs-list:data-active:text-ink",
         "group-data-[variant=default]/tabs-list:after:absolute group-data-[variant=default]/tabs-list:after:inset-x-0 group-data-[variant=default]/tabs-list:after:-bottom-px group-data-[variant=default]/tabs-list:after:h-0.5 group-data-[variant=default]/tabs-list:after:bg-brand group-data-[variant=default]/tabs-list:after:opacity-0 group-data-[variant=default]/tabs-list:data-active:after:opacity-100",
         "group-data-[variant=segmented]/tabs-list:h-full group-data-[variant=segmented]/tabs-list:rounded-[4px] group-data-[variant=segmented]/tabs-list:px-2.5 group-data-[variant=segmented]/tabs-list:text-sm group-data-[variant=segmented]/tabs-list:data-active:bg-surface-muted group-data-[variant=segmented]/tabs-list:data-active:text-ink",
