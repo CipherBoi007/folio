@@ -1,4 +1,8 @@
 spring:
+  flyway:
+    # Supabase pre-populates the public schema with its own objects. Baseline at 0 so V1+ still run.
+    baseline-on-migrate: true
+    baseline-version: "0"
   datasource:
     hikari:
       maximum-pool-size: ${DB_POOL_SIZE:5}
