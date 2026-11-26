@@ -157,7 +157,8 @@ class CatalogIT extends AbstractIntegrationTest {
         mvc.perform(as(get("/api/v1/books").param("availability", "OUT"), desk))
                 .andExpect(jsonPath("$.content[*].availableQuantity", everyItem(org.hamcrest.Matchers.is(0))));
         mvc.perform(as(get("/api/v1/books").param("language", "ta"), desk))
-                .andExpect(jsonPath("$.content[0].title").value("Ponniyin Selvan"));
+                .andExpect(jsonPath("$.content[*].title", hasItem("Ponniyin Selvan")))
+                .andExpect(jsonPath("$.content[*].language.code", everyItem(org.hamcrest.Matchers.is("ta"))));
         mvc.perform(as(get("/api/v1/books").param("sort", "available,desc").param("size", "5"), desk))
                 .andExpect(jsonPath("$.size").value(5))
                 .andExpect(jsonPath("$.content[0].availableQuantity", greaterThan(2)));
