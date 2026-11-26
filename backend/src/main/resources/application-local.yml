@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/folio-db}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:}
+
+folio:
+  auth:
+    jwt-secret: ${JWT_SECRET:local-dev-secret-change-me-0123456789abcdef}
+    cookie:
+      secure: ${AUTH_COOKIE_SECURE:false}
+
+logging:
+  level:
+    com.folio: DEBUG

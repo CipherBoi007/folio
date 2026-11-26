@@ -1,0 +1,262 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* =====================================================================================================
+   Folio design system — "Paper" (light) and "Reading room" (dark). See CLAUDE.md §8.
+   Raw palette lives in :root/.dark; @theme maps it onto Tailwind + shadcn token names.
+   Guard rails: the radius scale is clamped at 8px and the shadow scale is flat except for overlays,
+   so "rounded-2xl cards" and "large drop shadows" are impossible even if a component asks for them.
+   ===================================================================================================== */
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* ---- fonts (wired from next/font variables in app/layout.tsx) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-heading: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* ---- type scale: 12 / 13 / 14 / 16 / 20 / 28 / 40 */
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
+  --text-sm: 13px;
+  --text-sm--line-height: 18px;
+  --text-base: 14px;
+  --text-base--line-height: 20px;
+  --text-lg: 16px;
+  --text-lg--line-height: 24px;
+  --text-xl: 20px;
+  --text-xl--line-height: 28px;
+  --text-2xl: 28px;
+  --text-2xl--line-height: 34px;
+  --text-3xl: 40px;
+  --text-3xl--line-height: 44px;
+
+  /* ---- shadcn semantic tokens */
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--text);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--text);
+  --color-primary: var(--brand);
+  --color-primary-foreground: var(--brand-foreground);
+  --color-secondary: var(--surface-muted);
+  --color-secondary-foreground: var(--text);
+  --color-muted: var(--surface-muted);
+  --color-muted-foreground: var(--text-muted);
+  --color-accent: var(--surface-muted); /* shadcn "accent" = hover/selected item background */
+  --color-accent-foreground: var(--text);
+  --color-destructive: var(--danger);
+  --color-border: var(--hairline);
+  --color-input: var(--input-border);
+  --color-ring: var(--brand);
+
+  /* ---- Folio tokens */
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-ink: var(--text);
+  --color-ink-muted: var(--text-muted);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+
+  /* ---- charts: one accent series, muted ink greys for the rest */
+  --color-chart-1: var(--brand);
+  --color-chart-2: var(--chart-ink-2);
+  --color-chart-3: var(--chart-ink-3);
+  --color-chart-4: var(--chart-ink-4);
+  --color-chart-5: var(--chart-ink-5);
+
+  /* ---- sidebar */
+  --color-sidebar: var(--bg);
+  --color-sidebar-foreground: var(--text);
+  --color-sidebar-primary: var(--brand);
+  --color-sidebar-primary-foreground: var(--brand-foreground);
+  --color-sidebar-accent: var(--brand-soft);
+  --color-sidebar-accent-foreground: var(--brand);
+  --color-sidebar-border: var(--hairline);
+  --color-sidebar-ring: var(--brand);
+
+  /* ---- shape: 4px badges · 6px inputs/buttons · 8px cards/dialogs · nothing bigger */
+  --radius: 8px;
+  --radius-xs: 4px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 8px;
+  --radius-2xl: 8px;
+  --radius-3xl: 8px;
+  --radius-4xl: 8px;
+
+  /* ---- depth comes from hairlines; only overlays (popover, dialog, palette) get a soft shadow */
+  --shadow-2xs: none;
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow: none;
+  --shadow-md: var(--overlay-shadow);
+  --shadow-lg: var(--overlay-shadow);
+  --shadow-xl: var(--overlay-shadow);
+  --shadow-2xl: var(--overlay-shadow);
+
+  /* ---- motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --default-transition-duration: 160ms;
+  --default-transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ------------------------------------------------------------------------------------ Paper (light) */
+:root {
+  --bg: #f6f4ef;
+  --surface: #ffffff;
+  --surface-muted: #efece5;
+  --hairline: #e3dfd6;
+  --input-border: #d9d4c9;
+  --text: #1b1a17;
+  --text-muted: #6b675e;
+
+  --brand: #1f4d3a;
+  --brand-hover: #173b2c;
+  --brand-soft: #e4ede7;
+  --brand-foreground: #ffffff;
+
+  --success: #2f6b4f;
+  --success-soft: #e3eee7;
+  --warning: #a86a12;
+  --warning-soft: #f6ecda;
+  --danger: #a33a2b;
+  --danger-soft: #f6e4e0;
+  --info: #2c5a7a;
+  --info-soft: #e2ebf1;
+
+  --chart-ink-2: #8a857a;
+  --chart-ink-3: #b3aea3;
+  --chart-ink-4: #cfcac0;
+  --chart-ink-5: #5c584f;
+
+  --overlay-shadow: 0 12px 32px -12px rgb(27 26 23 / 0.18), 0 2px 6px -2px rgb(27 26 23 / 0.08);
+  --radius: 8px;
+  color-scheme: light;
+}
+
+/* ----------------------------------------------------------------------------- Reading room (dark) */
+.dark {
+  --bg: #121211;
+  --surface: #1a1a18;
+  --surface-muted: #23221f;
+  --hairline: #2a2925;
+  --input-border: #34332e;
+  --text: #edeae3;
+  --text-muted: #9a958a;
+
+  --brand: #6faf8e;
+  --brand-hover: #84bfa0;
+  --brand-soft: #1e2b24;
+  --brand-foreground: #0f1a14;
+
+  --success: #7dbf9b;
+  --success-soft: #1d2a22;
+  --warning: #d9a55b;
+  --warning-soft: #2e2516;
+  --danger: #e08a7b;
+  --danger-soft: #33201c;
+  --info: #86b0cf;
+  --info-soft: #1b2630;
+
+  --chart-ink-2: #77736a;
+  --chart-ink-3: #57544d;
+  --chart-ink-4: #403e39;
+  --chart-ink-5: #a29d92;
+
+  --overlay-shadow: 0 16px 40px -12px rgb(0 0 0 / 0.55), 0 2px 8px -2px rgb(0 0 0 / 0.35);
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground text-base;
+    font-feature-settings: "cv11", "ss01"; /* Inter: straight-sided digits/alternates for a calmer UI */
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--brand-soft);
+    color: var(--text);
+  }
+
+  /* Keyboard focus is always visible and always the accent colour. */
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  /* Numbers that line up (mono data, table cells) use tabular figures. */
+  .font-mono,
+  td,
+  th {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Fraunces: high optical size, soft weight, slight negative tracking for headings/KPIs. */
+  .font-display,
+  .font-heading {
+    font-optical-sizing: auto;
+    font-variation-settings: "SOFT" 30, "WONK" 0;
+    letter-spacing: -0.015em;
+  }
+}
+
+@layer utilities {
+  /* Small-caps-style label used for table headers, KPI labels and section eyebrows. */
+  .label-caps {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--hairline) transparent;
+  }
+}
+
+/* Respect users who ask for less motion: no slides, no fades, instant state changes. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

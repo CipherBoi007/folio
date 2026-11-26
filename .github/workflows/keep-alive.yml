@@ -1,0 +1,20 @@
+name: Keep API awake
+
+# Render's free tier sleeps after 15 minutes without traffic. Schedules can run a few minutes late,
+# so pair this with an external cron (see README) for reliable coverage.
+on:
+  schedule:
+    - cron: "*/14 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ping health endpoint
+        env:
+          HEALTH_URL: ${{ vars.API_HEALTH_URL }}
+        run: |
+          if [ -z "$HEALTH_URL" ]; then echo "Set the API_HEALTH_URL repository variable"; exit 0; fi
+          curl --fail --silent --show-error --retry 5 --retry-delay 20 --retry-all-errors --max-time 90 "$HEALTH_URL"

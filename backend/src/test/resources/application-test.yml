@@ -1,0 +1,17 @@
+spring:
+  flyway:
+    clean-disabled: false
+
+folio:
+  auth:
+    jwt-secret: test-secret-for-integration-tests-only-0123456789
+    cookie:
+      secure: false
+  cors:
+    allowed-origins: http://localhost:3000
+
+logging:
+  level:
+    root: WARN
+    com.folio: INFO
+    folio.access: WARN
