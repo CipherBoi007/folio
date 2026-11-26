@@ -32,13 +32,13 @@ jobs:
       TEST_DB_USERNAME: folio
       TEST_DB_PASSWORD: folio
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
           cache: maven
-      - run: ./mvnw -B verify
+      - run: chmod +x mvnw && ./mvnw -B verify
 
   frontend:
     name: Frontend · lint, typecheck, build
@@ -49,8 +49,8 @@ jobs:
     env:
       API_ORIGIN: https://api.example.invalid
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: "22"
           cache: npm
